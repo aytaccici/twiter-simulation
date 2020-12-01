@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('phone_number',20);
             $table->string('email')->unique();
             $table->string('twitter')->unique();
+            $table->integer('twitter_id')->nullable();
             $table->boolean('is_verified')->default(false);
             $table->string('password');
             $table->rememberToken();

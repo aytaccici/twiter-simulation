@@ -21,6 +21,7 @@ class ApiTokenCheck
     {
 
         $user = User::where('api_token', '=', $this->getToken())->first();
+
         $request->setUserResolver(function () use ($user) {
             return $user;
         });

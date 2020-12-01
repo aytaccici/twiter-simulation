@@ -14,5 +14,7 @@ Route::middleware('api.check')->group(function () {
     Route::get('v1/auth/me', [\App\Http\Controllers\Api\Auth\AuthController::class, 'me'])->name('auth.me');
 
 
+    Route::get('v1/tweets', [\App\Http\Controllers\Api\Tweet\TweetController::class, 'index'])->name('tweet.index');
+    Route::get('v1/tweets/move', [\App\Http\Controllers\Api\Tweet\TweetController::class, 'move'])->name('tweet.move');
 
 });

@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Contracts\TweetContract;
 use App\Contracts\UserContract;
+use App\Repositories\TweetRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,5 +29,6 @@ class RepositoryProvider extends ServiceProvider
     public function boot()
     {
         $this->app->bind(UserContract::class, UserRepository::class);
+        $this->app->bind(TweetContract::class, TweetRepository::class);
     }
 }
