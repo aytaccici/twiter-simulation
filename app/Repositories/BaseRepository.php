@@ -14,9 +14,7 @@ use Mockery\Exception;
  */
 abstract class BaseRepository implements RepositoryContract, CriteriaContract
 {
-    /**
-     * @var
-     */
+
     protected $entity;
 
     /**

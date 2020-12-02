@@ -6,6 +6,7 @@ namespace App\Services\Tweet;
 use App\Contracts\TweetContract;
 use App\Library\Twitter\TwitterAdapter;
 use App\Library\Twitter\TwitterMockApi;
+use App\Repositories\TweetRepository;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class TweetService
 {
 
     /**
-     * @var TweetContract
+     * @var TweetRepository
      */
     protected $twitterContract;
 

@@ -4,6 +4,7 @@ namespace App\Services\Auth;
 
 use App\Contracts\UserContract;
 use App\Events\UserRegistered;
+use App\Repositories\UserRepository;
 use App\User;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Auth\Passwords\PasswordBrokerManager;
@@ -31,7 +32,7 @@ class AuthService
     protected $user;
 
     /**
-     * @var UserContract
+     * @var UserRepository
      */
     protected $userRepository;
 
