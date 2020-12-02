@@ -4,12 +4,14 @@ namespace App\Exceptions;
 
 use App\Http\Controllers\BaseApiController;
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -86,6 +88,12 @@ class Handler extends ExceptionHandler
 
             return $this->baseApiController->service->fail(Response::HTTP_NOT_FOUND, $exception->getMessage());
         }
+
+        if ($exception instanceof AuthorizationException) {
+
+            return $this->baseApiController->service->fail(Response::HTTP_UNAUTHORIZED, $exception->getMessage());
+        }
+
 
         if ($exception instanceof HttpResponseException) {
             return parent::render($request, $exception);

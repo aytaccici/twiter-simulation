@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('surname');
-            $table->string('phone_number',20);
+            $table->string('phone_number',50);
             $table->string('email')->unique();
             $table->string('twitter')->unique();
             $table->integer('twitter_id')->nullable();

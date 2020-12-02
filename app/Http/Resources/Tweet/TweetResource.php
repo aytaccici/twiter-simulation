@@ -16,7 +16,7 @@ class TweetResource extends JsonResource
     {
         return [
             'id'           => $this->id,
-            'twitId'       => $this->id,
+            'twitterUniqueId'       => $this->id,
             'userName'     => $this->user->twitter,
             'likeCount'    => $this->liked_count,
             'reTweetCount' => $this->retweet_count,

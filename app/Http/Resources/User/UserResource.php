@@ -21,8 +21,8 @@ class UserResource extends JsonResource
             'email'      => $this->email,
             'twitter'   =>  $this->twitter,
             'api_token'  => $this->api_token,
-            'created_at' => $this->created_at->format('Y-m-d'),
-            'updated_at' => $this->updated_at->format('Y-m-d'),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at
         ];
     }
 }

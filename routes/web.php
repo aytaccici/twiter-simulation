@@ -12,16 +12,6 @@
 */
 
 Route::get('/', function () {
-
-
-    $twitterMockApi=  new \App\Library\Twitter\TwitterMockApi(1);
-
-    $adapter = new \App\Library\Twitter\TwitterAdapter($twitterMockApi);
-
-    $tweets =  $adapter->getTweets();
-
-    dd($tweets);
-
-
+    return view('welcome');
 });
 

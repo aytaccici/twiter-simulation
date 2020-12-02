@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Tweet;
+use App\Policies\TweetPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -13,7 +15,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
+
+        Tweet::class  =>  TweetPolicy::class
     ];
 
     /**

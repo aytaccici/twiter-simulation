@@ -3,9 +3,6 @@
 
 namespace App\Library\Twitter;
 
-
-use Carbon\Carbon;
-
 class TweetObject
 {
     private  $id;
@@ -113,6 +110,7 @@ class TweetObject
 
 
     /**
+     * Return Tweet object to Array
      * @return array
      */
     public function toArray(){

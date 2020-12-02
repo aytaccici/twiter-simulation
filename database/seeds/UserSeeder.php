@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
                 'phone_number' => $user['phoneNumber'],
                 'twitter' => $user['username'],
                 'twitter_id' => $user['id'],
-                'api_token' => \Illuminate\Support\Str::random(60),
+                'api_token' => $user['apiToken'],
                 'is_verified' => true
             ];
         }

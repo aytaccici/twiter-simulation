@@ -6,7 +6,11 @@ namespace App\Services\Tweet;
 use App\Contracts\TweetContract;
 use App\Library\Twitter\TwitterAdapter;
 use App\Library\Twitter\TwitterMockApi;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class TweetService
 {
@@ -25,6 +29,14 @@ class TweetService
         $this->twitterContract = $twitterContract;
     }
 
+
+    /**
+     * @return int|null
+     */
+    private function getLoggedInUserId()
+    {
+        return Auth::guard('api')->user()->twitter_id ?? null;
+    }
 
     /**
      * @return bool
@@ -65,13 +77,6 @@ class TweetService
         return $this->twitterContract->store($tweet);
     }
 
-    /**
-     * @return |null
-     */
-    private function getLoggedInUserId()
-    {
-        return $twitterUserId = Auth::guard('api')->user()->twitter_id ?? null;
-    }
 
 
     private function getTweetsFromApi(int $twitterUserId)
@@ -79,6 +84,49 @@ class TweetService
         $api            = new TwitterMockApi($twitterUserId);
         $twitterAdapter = new TwitterAdapter($api);
         return $twitterAdapter->getTweets();
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getUserTweets(){
+        return $this->twitterContract->findUserTweets((int)$this->getLoggedInUserId());
+    }
+
+
+    /**
+     * @param Request $request
+     * @return mixed
+     * @throws AuthorizationException | ModelNotFoundException
+     */
+    public function publishTweet(Request $request){
+
+        $tweet = $this->twitterContract->find( (int) $request->get('id'));
+
+
+        if (!$tweet){
+            throw new ModelNotFoundException();
+        }
+
+        $userCanUpdate = Gate::forUser(Auth::guard('api')->user())->allows('update',$tweet);
+
+        if (!$userCanUpdate){
+            throw new AuthorizationException();
+        }
+
+        $attributes = array(
+            'is_publish' => true
+        );
+
+        if ($request->get('content')){
+            $attributes['content'] = $request->get('content');
+        }
+
+        //update islemi gercekleştiriliyor
+        $this->twitterContract->update($attributes,$tweet->id);
+
+        return $tweet->fresh();
     }
 
 
