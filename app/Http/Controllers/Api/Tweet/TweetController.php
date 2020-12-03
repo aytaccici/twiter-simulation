@@ -21,10 +21,26 @@ class TweetController extends BaseApiController
     }
 
 
+
     /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @OA\GET(
+     *      path="/api/v1/tweets",
+     *      operationId="tweets",
+     *      tags={"Tweeets"},
+     *      summary="get all tweets in system",
+     *      description="You can get all tweets using this endpoint",
+     *        @OA\Response(
+     *         response="200",
+     *         description="success",
+     *     ),
+     *    @OA\Response(
+     *          response=403,
+     *          description="Forbidden error ",
+     *      ),
+     *      security={{ "apiAuth": {} }}
+     *     )
      */
+
     public function index(Request $request)
     {
         $data = TweetResource::collection(($this->repository->getAllTweetsOrderByLatest()));
@@ -32,23 +48,51 @@ class TweetController extends BaseApiController
     }
 
 
+
     /**
-     * @param Request $request
-     * @param TweetService $tweetService
-     * @return \Illuminate\Http\JsonResponse
+     * @OA\POST(
+     *      path="/api/v1/tweets/fetch",
+     *      operationId="fetch",
+     *      tags={"Tweeets"},
+     *      summary="Fetch tweets of logger user from Twitter",
+     *      description="You can move tweets from Twitter to this system using this end point",
+     *        @OA\Response(
+     *         response="200",
+     *         description="success",
+     *     ),
+     *    @OA\Response(
+     *          response=403,
+     *          description="Forbidden error ",
+     *      ),
+     *      security={{ "apiAuth": {} }}
+     *     )
      */
+
     public function fetchMyTweets(Request $request, TweetService $tweetService)
     {
-
         $tweetService->moveTweets();
         return $this->service->success();
     }
 
 
+
     /**
-     * @param Request $request
-     * @param TweetService $tweetService
-     * @return \Illuminate\Http\JsonResponse
+     * @OA\GET(
+     *      path="/api/v1/tweets/me",
+     *      operationId="me",
+     *      tags={"Tweeets"},
+     *      summary="Show tweets of logged user",
+     *      description="You can list all published tweets of logged user",
+     *        @OA\Response(
+     *         response="200",
+     *         description="success",
+     *     ),
+     *    @OA\Response(
+     *          response=403,
+     *          description="Forbidden error ",
+     *      ),
+     *      security={{ "apiAuth": {} }}
+     *     )
      */
     public function me(Request $request, TweetService $tweetService)
     {
@@ -58,20 +102,35 @@ class TweetController extends BaseApiController
     }
 
 
-    /**
-     * @param $userId
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getUserTweetsById($userId)
-    {
 
-        $data = TweetResource::collection(($this->repository->findUserTweets((int)$userId)));
-        return $this->service->success($data);
-    }
 
     /**
-     * @param $userName
-     * @return \Illuminate\Http\JsonResponse
+     * @OA\GET(
+     *      path="/api/v1/tweets/{username}",
+     *      operationId="me",
+     *      tags={"Tweeets"},
+     *      summary="Show published tweets of username",
+     *      description="You can list all published tweets of user",
+     *        @OA\Response(
+     *         response="200",
+     *         description="success",
+     *     ),
+     * @OA\Parameter(
+     *    description="Twitter username of User",
+     *    in="path",
+     *    name="username",
+     *    required=true,
+     *    example="Pascale.Gulgowski20",
+     *    @OA\Schema(
+     *       type="string"
+     *    )
+     * ),
+     *    @OA\Response(
+     *          response=403,
+     *          description="Forbidden error ",
+     *      ),
+     *      security={{ "apiAuth": {} }}
+     *     )
      */
     public function getUserTweetsByName($userName)
     {
@@ -81,10 +140,39 @@ class TweetController extends BaseApiController
         return $this->service->success($data);
     }
 
+
     /**
-     * @param PublishTweet $request
-     * @param TweetService $tweetService
-     * @return \Illuminate\Http\JsonResponse
+     * @OA\PUT(
+     *      path="/api/v1/tweets/publish",
+     *      operationId="publish",
+     *      tags={"Tweeets"},
+     *      summary="Publish a  tweet",
+     *      description="You can pushlish or edit a tweet using this end point",
+     *        @OA\Response(
+     *         response="200",
+     *         description="success",
+     *     ),
+     *
+        *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *            mediaType="application/json",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="id", type="string", description = "id of tweet which will be edit" ),
+     *               @OA\Property(property="content", type="string", description = "If you want to edit tweet, you should fill this field."),
+     *            )
+     *        )
+     *    ),
+     *    @OA\Response(
+     *          response=403,
+     *          description="Forbidden error ",
+     *      ),
+     *    @OA\Response(
+     *          response=401,
+     *          description="Unauthorized",
+     *      ),
+     *      security={{ "apiAuth": {} }}
+     *     )
      */
     public function publish(PublishTweet $request, TweetService $tweetService)
     {

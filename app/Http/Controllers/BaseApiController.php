@@ -6,7 +6,6 @@ use App\Services\Utility\JsonResponseService;
 
 class BaseApiController extends Controller
 {
-
     public $service;
 
     /**

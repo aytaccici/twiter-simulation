@@ -1,0 +1,324 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Twitter API",
+        "description": "Twitter Api",
+        "contact": {
+            "email": "aytaccici@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "v1"
+    },
+    "servers": [
+        {
+            "url": "http://0.0.0.0:10080",
+            "description": "Twitter API Server"
+        }
+    ],
+    "paths": {
+        "/api/v1/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "login system",
+                "description": "You can log in to sytem using this end point",
+                "operationId": "login",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfull login"
+                    },
+                    "400": {
+                        "description": "Bad Response when username or password is wrong"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "register a user to system",
+                "description": "You can use  this end  point to save  a user to sytem.",
+                "operationId": "register",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "surname": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "phone_number": {
+                                        "type": "string"
+                                    },
+                                    "twitter": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfull register"
+                    },
+                    "400": {
+                        "description": "If a required fied is null, it shows Bad Reponse"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/verify": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "verify a user",
+                "description": "You can verify a user using this end  point.",
+                "operationId": "veriyf",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "code": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Verify user successfull"
+                    },
+                    "400": {
+                        "description": "If a required fied is null, it shows Bad Reponse"
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/me": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "show about logged user",
+                "description": "You can give about information logged user using this end point",
+                "operationId": "me",
+                "responses": {
+                    "200": {
+                        "description": "Verify user successfull"
+                    },
+                    "403": {
+                        "description": "Forbidden error "
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/tweets": {
+            "get": {
+                "tags": [
+                    "Tweeets"
+                ],
+                "summary": "get all tweets in system",
+                "description": "You can get all tweets using this endpoint",
+                "operationId": "tweets",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "403": {
+                        "description": "Forbidden error "
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/tweets/fetch": {
+            "post": {
+                "tags": [
+                    "Tweeets"
+                ],
+                "summary": "Fetch tweets of logger user from Twitter",
+                "description": "You can move tweets from Twitter to this system using this end point",
+                "operationId": "fetch",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "403": {
+                        "description": "Forbidden error "
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/tweets/me": {
+            "get": {
+                "tags": [
+                    "Tweeets"
+                ],
+                "summary": "Show tweets of logged user",
+                "description": "You can list all published tweets of logged user",
+                "operationId": "me",
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "403": {
+                        "description": "Forbidden error "
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/tweets/{username}": {
+            "get": {
+                "tags": [
+                    "Tweeets"
+                ],
+                "summary": "Show published tweets of username",
+                "description": "You can list all published tweets of user",
+                "operationId": "me",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "description": "Twitter username of User",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "Pascale.Gulgowski20"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "403": {
+                        "description": "Forbidden error "
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/tweets/publish": {
+            "put": {
+                "tags": [
+                    "Tweeets"
+                ],
+                "summary": "Publish a  tweet",
+                "description": "You can pushlish or edit a tweet using this end point",
+                "operationId": "publish",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "description": "id of tweet which will be edit",
+                                        "type": "string"
+                                    },
+                                    "content": {
+                                        "description": "If you want to edit tweet, you should fill this field.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "403": {
+                        "description": "Forbidden error "
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "apiAuth": {
+                "type": "http",
+                "description": "Login with email and password to get the authentication token",
+                "name": "Token based Based",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
