@@ -9,10 +9,11 @@ Kullanılanlar
 
  
 ### BILGILENDIRME
-Proje Docker Containerlari olarak ayağa kaldırabilir. Container ayağa kalktığında üç adet container olusasacak ve aşağıdaki isimleri alacaklar
-  - Nginx Sunucu : webserver
+Proje Docker Containerlari olarak ayağa kaldırabilir. Container ayağa kalktığında dört adet container olusasacak ve aşağıdaki isimleri alacaklar
+  - Nginx Sunucu : web
   - Laravel Application  : app
-  - Mysql : db
+  - Mysql : databse
+  - Phpmyadmin : database-ui
 
 Uygulamayı docker ile containerize etmeden önce env.example dosyasınının adını .env olarak değiştirin. 
 
