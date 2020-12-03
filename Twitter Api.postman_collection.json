@@ -1,0 +1,397 @@
+{
+	"info": {
+		"_postman_id": "c7097eac-ee70-4d2e-8177-982c82ca8c39",
+		"name": "Twitter Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"name\": \"Aytaç\",\n   \"surname\": \"Cici\",\n   \"email\": \"aytaccici@gmail.com\",\n   \"phone_number\": \"5557494998\",\n   \"twitter\" : \"aytaccici\",\n   \"password\" : \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:10080/api/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "10080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9d3576b4-1c57-44c0-b6fe-811c4d0e44e4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:10080/api/v1/auth/me",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "10080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Arpm8FfJFb7p0jKRlNqdjAx2vlcE377eTCn2vzcTHelWscsjKqb669YVqAsh",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"email\": \"aytaccici@gmail.com\",\n   \"code\" : \"35353a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:10080/api/v1/auth/verify",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "10080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4GZ4KZE2HzDwNMsfOlb7OmcAmNnskYSq7ridDW72qnglMBvxW3yAF3d7n82y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"email\": \"aytaccici@gmail.com\",\n   \"password\" : \"123456\"\n}"
+						},
+						"url": {
+							"raw": "http://0.0.0.0:10080/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "10080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Tweets",
+			"item": [
+				{
+					"name": "get-all-tweets",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "77191c11-2ee4-4569-8b73-33adc0a9cc78",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:10080/api/v1/tweets",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "10080",
+							"path": [
+								"api",
+								"v1",
+								"tweets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-my-tweets",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9d3576b4-1c57-44c0-b6fe-811c4d0e44e4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:10080/api/v1/tweets/me",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "10080",
+							"path": [
+								"api",
+								"v1",
+								"tweets",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-user-tweets by-user-name",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9d3576b4-1c57-44c0-b6fe-811c4d0e44e4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:10080/api/v1/tweets/Pascale.Gulgowski20",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "10080",
+							"path": [
+								"api",
+								"v1",
+								"tweets",
+								"Pascale.Gulgowski20"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "move-tweets",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9d3576b4-1c57-44c0-b6fe-811c4d0e44e4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:10080/api/v1/tweets/fetch",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "10080",
+							"path": [
+								"api",
+								"v1",
+								"tweets",
+								"fetch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pubslish-tweets",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9d3576b4-1c57-44c0-b6fe-811c4d0e44e4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n    \"id\": \"1\",\n    \"content\" : \"Update content 1 By Aytac Cici\"\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:10080/api/v1/tweets/publish",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "10080",
+							"path": [
+								"api",
+								"v1",
+								"tweets",
+								"publish"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "1e831f0b-d1a2-4ccf-aa5c-8f1bf9c7dc3b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "07180b42-86ba-4f53-be8c-a6073192288f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
